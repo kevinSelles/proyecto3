@@ -1,32 +1,35 @@
-import './style.css'
+import { getPhotos } from './src/components/getPhotos/getPhotos';
+import { getHeaderButtons } from './src/components/button/button';
+import { getInput } from './src/components/input/input';
+import { getUserButtons } from './src/components/userButton/userButton';
+import './style.css';
 
 const header = document.createElement("header");
+document.body.prepend(header);
+
+const leftContainer = document.createElement("div");
+const centerContainer = document.createElement("div");
+const rightContainer = document.createElement("div");
+
+leftContainer.classList.add("header-left");
+centerContainer.classList.add("header-center");
+rightContainer.classList.add("header-right");
+
+header.append(leftContainer, centerContainer, rightContainer);
+
 const logo = document.createElement("img");
 logo.src = "https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png";
-const title = document.createElement("h1");
-title.textContent = "Pinterest Simulator";
+leftContainer.appendChild(logo);
 
-header.appendChild(logo);
-header.appendChild(title);
-document.body.prepend(header);
+const buttons = ["Inicio", "Explorar", "Crear"];
+for(let text of buttons) {
+  getHeaderButtons(text, leftContainer);
+}
+
+getInput(centerContainer);
+getUserButtons(rightContainer);
+
 
 const main = document.createElement("main");
 document.body.appendChild(main);
-
-const apiKey = "m9-8m92WwSq9lSdZX4Dz0VPfrNWIVI0oB8VDE-Dd3IA";
-
-fetch("https://api.unsplash.com/photos/random?count=15", {
-  headers: {
-    Authorization: `Client-ID ${apiKey}`
-  }
-})
-.then((res) => res.json())
-.then((photos) => {
-  console.log(photos)
-
-  for(const photo of photos) {
-    const img = document.createElement("img");
-    img.src = photo.urls.small;
-    main.appendChild(img);
-  }
-}) 
+getPhotos(main);

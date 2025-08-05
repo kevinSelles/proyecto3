@@ -1,0 +1,33 @@
+.modal-login {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 25%;
+  height: 25%;
+  transform: translate(-50%, -50%);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 222;
+  border: solid 2px rgb(194, 0, 0);
+  border-radius: 25px;
+  background-color: whitesmoke;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content {
+  padding: 2rem;
+  text-align: center;
+  border-radius: 25px;
+  font-size: 18px;
+}
+
+.modal-content button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}

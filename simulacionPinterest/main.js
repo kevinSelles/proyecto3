@@ -2,6 +2,7 @@ import { getPhotos } from './src/components/getPhotos/getPhotos';
 import { getHeaderButtons } from './src/components/button/button';
 import { getInput } from './src/components/input/input';
 import { getUserButtons } from './src/components/userButton/userButton';
+import { modalLogin } from './src/components/modalLogin/modalLogin';
 import './style.css';
 
 const header = document.createElement("header");
@@ -20,16 +21,50 @@ header.append(leftContainer, centerContainer, rightContainer);
 const logo = document.createElement("img");
 logo.src = "https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png";
 leftContainer.appendChild(logo);
-
-const buttons = ["Inicio", "Explorar", "Crear"];
-for(let text of buttons) {
-  getHeaderButtons(text, leftContainer);
-}
-
-getInput(centerContainer);
-getUserButtons(rightContainer);
-
+logo.addEventListener("click", loadPhotos);
 
 const main = document.createElement("main");
 document.body.appendChild(main);
-getPhotos(main);
+const modal = modalLogin();
+loadPhotos();
+
+const buttons = ["Inicio", "Explorar", "Crear"];
+for(let text of buttons) {
+  const btn = getHeaderButtons(text, leftContainer);
+
+  if(text === "Inicio") {
+    btn.addEventListener("click", loadPhotos)
+  }
+  if(text === "Explorar") {
+    btn.addEventListener("click", loadExploreButton)
+  }
+  if(text === "Crear") {
+    btn.addEventListener("click", () => {
+      modal.style.display = "flex"
+  })
+  }
+}
+
+const input = getInput(centerContainer);
+
+input.addEventListener("keydown", (event) => {
+  if(event.key === "Enter" && input.value !== "") {
+    const search = input.value;
+    main.innerHTML = "";
+    getPhotos(main, 20, search);
+  }
+})
+
+getUserButtons(rightContainer);
+
+function loadPhotos() {
+  main.innerHTML = "";
+
+  getPhotos(main);
+}
+
+function loadExploreButton() {
+  main.innerHTML = "";
+
+  getPhotos(main, 20, "adventure");
+}

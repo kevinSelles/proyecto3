@@ -3,6 +3,7 @@ import { getHeaderButtons } from './src/components/button/button';
 import { getInput } from './src/components/input/input';
 import { getUserButtons } from './src/components/userButton/userButton';
 import { modalLogin } from './src/components/modalLogin/modalLogin';
+import { getFooter } from './src/components/footer/footer';
 import './style.css';
 
 const header = document.createElement("header");
@@ -82,3 +83,5 @@ function loadExploreButton() {
 
   getPhotos(main, 20, "adventure");
 }
+
+getFooter();

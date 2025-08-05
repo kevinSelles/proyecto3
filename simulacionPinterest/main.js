@@ -52,10 +52,24 @@ input.addEventListener("keydown", (event) => {
     const search = input.value;
     main.innerHTML = "";
     getPhotos(main, 20, search);
+    input.value = "";
   }
 })
 
 getUserButtons(rightContainer);
+const notificationButton = document.querySelector(".notification");
+const chatButton = document.querySelector(".chat");
+const userButton = document.querySelector(".user");
+
+notificationButton.addEventListener("click", () => {
+  modal.style.display = "flex";
+})
+chatButton.addEventListener("click", () => {
+  modal.style.display = "flex";
+})
+userButton.addEventListener("click", () => {
+  window.open("https://www.pinterest.com/join/", "_blank");
+})
 
 function loadPhotos() {
   main.innerHTML = "";

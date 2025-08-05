@@ -7,10 +7,21 @@ const userImg = [
 ];
 
 export function getUserButtons(header) {
-  for(let imgUrl of userImg) {
+  for(let i = 0; i < userImg.length; i++) {
 
     const userButton = document.createElement("img");
-    userButton.src = imgUrl;
+    userButton.src = userImg[i];
+
+    if(i === 0) {
+      userButton.classList.add("notification");
+    };
+    if(i === 1) {
+      userButton.classList.add("chat");
+    };
+    if(i === 2) {
+      userButton.classList.add("user");
+    };
+
     header.appendChild(userButton); 
   }
 };
